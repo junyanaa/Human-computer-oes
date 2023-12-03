@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oes.dao.TeaMapper">
+    <select id="teaLogin" resultType="com.oes.bean.Teacher">
+        select * from teacher where tea_ID = #{tea_ID} and tea_password = #{tea_password}
+    </select>
+    <select id="findTeacher" resultType="com.oes.bean.Teacher">
+        select *from teacher where tea_id=#{tea_id}
+    </select>
+
+    <update id="changeName">
+        update teacher set tea_name=#{tea_name} where tea_id=#{tea_id}
+    </update>
+    <update id="changeBirthdate">
+        update teacher set tea_birthDate=#{tea_birthDate} where tea_id=#{tea_id}
+    </update>
+    <update id="changePassword">
+        update teacher set tea_password=#{tea_password} where tea_id=#{tea_id}
+    </update>
+    <update id="changeCourse">
+        update teacher set tea_course=#{tea_course} where tea_id=#{tea_id}
+    </update>
+    <update id="changeGrade">
+        update teacher set tea_grade=#{tea_grade} where tea_id=#{tea_id}
+    </update>
+    <update id="changePhone">
+        update teacher set tea_phone=#{tea_phone} where tea_id=#{tea_id}
+    </update>
+
+</mapper>

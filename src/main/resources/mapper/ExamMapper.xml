@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oes.dao.ExamMapper">
+<!--搜索考试-->
+    <select id="findExam" resultType="com.oes.bean.Exam">
+        select * from exam where exam_id = #{exam_id}
+    </select>
+<!--    所有考试-->
+    <select id="allExam" resultType="com.oes.bean.Exam">
+        select * from exam
+    </select>
+    <!--创建考试-->
+    <insert id="addExam" parameterType = "com.oes.bean.Exam" useGeneratedKeys="true" keyProperty="id">
+        insert into exam(exam_id, exam_name, exam_start_Time, exam_end_Time, exam_description)
+        values(#{exam_id},
+               #{exam_name},
+               #{exam_start_Time,jdbcType=DATETIMEOFFSET},
+               #{exam_end_Time,jdbcType=DATETIMEOFFSET},
+               #{exam_description}
+               )
+    </insert>
+<!--    删除考试-->
+    <delete id="deleteExam">
+        delete from exam where exam_id=#{exam_id}
+    </delete>
+</mapper>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oes.dao.StuMapper">
+
+    <!--学生登录-->
+    <select id="stuLogin" resultType="com.oes.bean.Student">
+  		select * from student where stu_number = #{stu_number} and stu_password = #{stu_password}
+  	</select>
+<select id="findStudent" resultType="com.oes.bean.Student">
+    select * from student where stu_id=#{stu_id}
+</select>
+    <select id="allStudent" resultType="com.oes.bean.Student">
+        select *from student where stu_grade=#{stu_grade}
+    </select>
+    <delete id="deleteStudent">
+        delete from student where stu_id=#{stu_id}
+    </delete>
+    <!--学生查成绩-->
+    <select id="stuCheckScore" resultType="com.oes.bean.ExamResult">
+        select exam_log.exam_id, exam_name, exam_start_Time, exam_end_Time, score
+        from exam_log, exam
+        where exam_log.exam_id = exam.exam_id
+          and stu_id = #{stu_id}
+    </select>
+
+    <!--学生参加考试-->
+    <!--<select id="stuAttendExam" resultType="com.oes.bean.ExamResult"></select>-->
+
+    <!--学生查所有考试-->
+    <select id="stuFindAllExam" resultType="com.oes.bean.Exam">
+        select * from exam
+    </select>
+<!--    <insert id="addStudent">-->
+<!--        insert into student(STU_NUMBER, STU_PASSWORD, STU_NAME, STU_SEX, STU_BIRTH, STU_NATION, STU_GRADE, STU_COLLEGE, STU_MAJOR)value (-->
+<!--            #{},-->
+<!--            #{},-->
+<!--            #{},-->
+<!--            #{},-->
+<!--            #{},-->
+<!--            #{},-->
+<!--            #{},-->
+<!--            #{},-->
+<!--            #{}-->
+<!--            )-->
+<!--    </insert>-->
+</mapper>

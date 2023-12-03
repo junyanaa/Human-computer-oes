@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oes.dao.AnswerMapper">
+    <select id="allAnswer" resultType="com.oes.bean.Answer">
+        select * from answer where log_id=#{log_id}
+    </select>
+    <!--学生提交考试答案后,创建一条学生成绩记录 但暂不记录成绩-->
+    <insert id="addExam_log">
+        insert into exam_log(exam_id,stu_id,submit_Time)
+        values (#{exam_id} , #{stu_id} , #{submit_Time})
+    </insert>
+
+    <!--获取刚刚创建的成绩记录的id-->
+    <select id="findLog_id" resultType="int">
+        select log_id
+        from exam_log
+        where exam_id = #{exam_id} and stu_id = #{stu_id}
+    </select>
+
+    <!--学生提交考试答案后，将答案存入数据库-->
+    <insert id="completeExam">
+        insert into answer(log_id , question_id , stu_answer)
+        values(#{log_id} , #{question_id} , #{stu_answer})
+    </insert>
+
+    <!--查找学生的答案集合-->
+    <select id="findStu_answer" resultType="com.oes.bean.Answer">
+        select *
+        from answer
+        where log_id = #{log_id}
+    </select>
+
+    <!--存入学生该门考试的成绩-->
+    <update id="addScore">
+        update exam_log set score = #{score}
+        where log_id = #{log_id}
+    </update>
+</mapper>

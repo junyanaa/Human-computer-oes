@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oes.dao.QuestionMapper">
+    <select id="findAllQuestion" resultType="com.oes.bean.Question">
+        select * from question where exam_id=#{exam_id}
+    </select>
+    <delete id="deleteQuestion">
+        delete from question where exam_id=#{exam_id}
+    </delete>
+    <delete id="deleteQuestionById">
+        delete from question where question_id=#{question_id}
+    </delete>
+    <insert parameterType="com.oes.bean.Question" id="addChoiceQuestion">
+        insert  into question(question_id,exam_id,question_content,question_type,question_answer,question_optionA,question_optionB,question_optionC,question_optionD,score)
+            value
+            (
+             #{question_id},
+             #{exam_id},
+             #{question_content},
+             #{question_type},
+             #{question_answer},
+             #{question_optionA},
+             #{question_optionB},
+             #{question_optionC},
+             #{question_optionD},
+            #{score}
+                 )
+    </insert>
+    <insert parameterType="com.oes.bean.Question" id="addBlankQuestion">
+        insert into question(question_id, exam_id, question_type, question_content, question_answer,score)
+        value
+            (
+             #{question_id},
+             #{exam_id},
+             #{question_type},
+             #{question_content},
+             #{question_answer},
+            #{score}
+                )
+    </insert>
+    <insert parameterType="com.oes.bean.Question" id="addYesOrNoQuestion">
+        insert into question(question_id, exam_id, question_type, question_content, question_answer,score)
+        value
+        (
+         #{question_id},
+         #{exam_id},
+         #{question_type},
+         #{question_content},
+         #{question_answer},
+        #{score}
+            )
+    </insert>
+    <select id="findQuestionById" resultType="com.oes.bean.Question">
+        select * from question where question_id=#{question_id}
+    </select>
+    <select id="findQuestion" resultType="com.oes.bean.Question">
+        select * from question where exam_id = #{exam_id}
+    </select>
+</mapper>
