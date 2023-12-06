@@ -190,7 +190,7 @@
                 <td><%=examResult.getExam_start_Time() %>-<%=examResult.getExam_end_Time()%></td>
                 <td><%=examResult.getScore()%></td>
                 <td>
-                    <button class="button">成绩申诉</button>
+                    <button class="button">查看试卷</button>
                 </td>
             </tr>
             <%}%>
