@@ -5,97 +5,150 @@
 <!DOCTYPE html>
 <html>
 <style>
-    body{
-        background-color: #c6e070;
-    }
-
-    .shell{
-        width: 1100px;
-        margin-top: -23px;
-        margin-left: 10%;
-        padding-left: 5%;
-        background: rgb(242, 242, 242);
-    }
-
-    .h1{
-        margin-left: 32%;
-    }
-
-    .time1{
-        float: left;
-    }
-
-    form{
-        clear: right;
-    }
-    .clockBody{
-        position: fixed;
-        top: 30px;
-        right: 30px;
-    }
-    .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 300px;
-        height: 150px;
-        background-color: transparent; }
-
-    .container .clock {
+    body {
+        font-family: 'Arial', sans-serif;
+        background: radial-gradient(circle, #ff6b6b, #f6f6f6, #48dbfb);
+        margin: 0;
+        padding: 0;
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 200px;
-        height: 100px;
-        background-color: #5f546e;
-        box-shadow: 0 0 40px rgba(0, 0, 0, 0.6); }
+        min-height: 100vh;
+    }
 
-    .container .clock .clock-item {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        width: 30px;
-        margin: 0 20px; }
+    .clockBody{
+        position: fixed;
+        margin-top: -95%;
+        margin-left: -73%;
+        background-color: #48dbfb;
+    }
 
-    .container .clock .clock-item div {
-        font-size: 12px;
-        color: #ccc; }
-
-    .container .clock .clock-item span {
-        font-size: 20px;
-        font-weight: 100;
-        color: #fff;
-        letter-spacing: 5px; }
-
-    .container .clock .clock-item:not(:last-child)::after {
-        content: ":";
-        position: absolute;
-        top: 35%;
-        right: -22px;
-        font-size: 20px;
-        color: #fff; }
-
-    .toast {
-        position: absolute;
-        top: calc(50% - 25px);
-        left: calc(50% - 100px);
-        width: 200px;
-        height: 50px;
-        line-height: 50px;
-        text-align: center;
-        color: #fff;
-        background-color: rgba(0, 0, 0, 0.6);
+    .container {
+        width: 90%;
+        max-width: 800px;
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         opacity: 0;
-        pointer-events: none; }
+        transform: translateY(-50px);
+        animation: fadeInUp 0.6s ease forwards;
+    }
 
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+        font-size: 2em;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .question {
+        margin-bottom: 30px;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInQuestion 0.5s ease forwards;
+    }
+
+    @keyframes fadeInQuestion {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .question h3 {
+        color: #555;
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+
+    .question p {
+        color: #777;
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+
+    input[type="radio"],
+    input[type="checkbox"] {
+        margin-right: 10px;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        width: 18px;
+        height: 18px;
+        border: 2px solid #ccc;
+        border-radius: 50%;
+        outline: none;
+        cursor: pointer;
+        vertical-align: middle;
+        position: relative;
+        transition: border-color 0.3s ease;
+    }
+
+    input[type="radio"]::after,
+    input[type="checkbox"]::after {
+        content: '';
+        display: block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #ff6b6b;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        transition: transform 0.3s ease;
+    }
+
+    input[type="radio"]:checked::after,
+    input[type="checkbox"]:checked::after {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    input[type="text"] {
+        padding: 12px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        width: calc(100% - 26px);
+        margin-top: 5px;
+        font-size: 18px;
+        transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+        border-color: #ff6b6b;
+    }
+
+    button {
+        padding: 14px 30px;
+        background-color: #ff6b6b;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 20px;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #48dbfb;
+    }
 </style>
 <script src="../js/stuExamming.js"></script>
 <script>
     /*定时自动提交*/
     setTimeout(function(){
-        console.log("考试时间到，将自动提交试卷")
-        document.getElementById("questions").submit()}
+            console.log("考试时间到，将自动提交试卷")
+            document.getElementById("questions").submit()}
         , 1000*60*60*2)
 </script>
 <head>
@@ -107,7 +160,7 @@
         for (Exam exam:exams){
             if (id == exam.getExam_id()){
                 //将当前的考试对象赋值为匹配到的考试
-                 currentExam = exam;
+                currentExam = exam;
             }
         }
 
@@ -118,25 +171,20 @@
 </head>
 <body>
 <div class="clockBody">
-    <div class="container">
-        <!-- <div class="menu">
-            <div class="running"><span>开启</span></div>
-            <div class="paused"><span>暂停</span></div>
-        </div> -->
         <div class="clock">
-            <div class="clock-item hour"><div>时</div><span>00</span></div>
-            <div class="clock-item minute"><div>分</div><span>00</span></div>
-            <div class="clock-item second"><div>秒</div><span>00</span></div>
+            <div class="clock-item hour"><span>00</span><div>时</div></div>
+            <div class="clock-item minute"><span>00</span><div>分</div></div>
+            <div class="clock-item second"><span>00</span><div>秒</div></div>
         </div>
-    </div>
-    <div class="toast">我是提示框</div>
 </div>
-    <div class="shell">
-        <h1 class="h1"><%=currentExam.getExam_name()%> 考试中</h1>
-        <h4 class="time1">考试时间：<%=currentExam.getExam_start_Time()%> - <%=currentExam.getExam_end_Time()%></h4>
-        <br><br><br><br>
 
-        <form action="/completeExam" method="post" id="questions">
+<div class="shell">
+    <h1 class="h1"><%=currentExam.getExam_name()%> 考试中</h1>
+    <h4 class="time1">考试时间：<%=currentExam.getExam_start_Time()%> - <%=currentExam.getExam_end_Time()%></h4>
+    <br><br><br><br>
+
+    <form action="/completeExam" method="post" id="questions">
+        <div class="question">
             <h3>一、单项选择题</h3>
             <%
                 for (Question question:questions){
@@ -149,8 +197,10 @@
             <%}
             }
             %>
-            <br><br><br>
+        </div>
+        <br><br><br>
 
+        <div class="question">
             <h3>二、多选题</h3>
             <%
                 for (int i = 0 ;  i < questions.size(); i++){
@@ -165,8 +215,10 @@
             <%}
             }
             %>
-            <br><br><br>
+        </div>
+        <br><br><br>
 
+        <div class="question">
             <h3>三、判断题</h3>
             <%
                 for (Question question:questions){
@@ -177,8 +229,10 @@
             <%}
             }
             %>
-            <br><br><br>
+        </div>
+        <br><br><br>
 
+        <div class="question">
             <h3>四、填空题</h3>
             <%
                 for (Question question:questions){
@@ -188,13 +242,14 @@
             <%}
             }
             %>
+        </div>
+        <br><br><br>
 
-            <br><br><br>
-            <input type="submit" name="sub" value="提交">
-            <input type="reset" name="res" value="重置">
-            <br><br><br><br><br><br>
-        </form>
-    </div>
+        <input type="submit" name="sub" value="提交">
+        <input type="reset" name="res" value="重置">
+        <br><br><br><br><br><br>
+    </form>
+</div>
+</div>
 </body>
 </html>
-
