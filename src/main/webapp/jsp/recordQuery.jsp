@@ -25,6 +25,7 @@
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             min-height: 100vh;
             background: url(/images/5.png) center / cover;
@@ -32,6 +33,7 @@
             justify-content: center;
             align-items: center;
         }
+
         main.table {
             width: 77vw;
             height: 80vh;
@@ -40,6 +42,7 @@
             border-radius: 16px;
             overflow: hidden;
         }
+
         .header {
             width: 100%;
             height: 10%;
@@ -49,16 +52,19 @@
             justify-content: space-between;
             align-items: center;
         }
+
         .header .input-group img {
             width: 20px;
             height: 20px;
         }
+
         .header .input-group input {
             width: 100%;
             background-color: transparent;
             border: none;
             outline: none;
         }
+
         .shell {
             width: 95%;
             max-height: calc(90% - 25px);
@@ -68,13 +74,16 @@
             overflow: auto;
             overflow: unset;
         }
+
         .shell::-webkit-scrollbar {
             width: 10px;
             height: 10px;
         }
+
         table {
             width: 100%;
         }
+
         td img {
             width: 36px;
             height: 36px;
@@ -82,6 +91,7 @@
             border-radius: 50%;
             vertical-align: middle;
         }
+
         table,
         th,
         td {
@@ -89,6 +99,7 @@
             padding: 20px;
             text-align: left;
         }
+
         thead th {
             position: sticky;
             top: 0;
@@ -96,39 +107,48 @@
             background-color: #d5d1defe;
             cursor: pointer;
         }
+
         /* 偶数行背景色 */
         tbody tr:nth-child(even) {
             background-color: #0000000b;
         }
+
         tbody tr:hover {
             background-color: #fff6 !important;
         }
+
         .button {
             padding: 5px 0;
             border-radius: 10px;
             text-align: center;
         }
+
         tr:nth-child(4n) .button {
             background-color: #86e49d;
             color: #006b21;
         }
+
         tr:nth-child(4n-1) .button {
             background-color: #ebc474;
         }
+
         tr:nth-child(4n+1) .button {
             background-color: #d893a3;
             color: #b30021;
         }
+
         tr:nth-child(4n+2) .button {
             background-color: #6fcaea;
         }
+
         /*顶部按钮样式*/
         .container {
             /* 这个父元素设置了弹性布局 就能让子元素水平排列了,主要原理是让子元素在主轴水平排列 */
             display: flex;
             /* 设置了弹性布局的盒子的子元素是可以直接宽和高的 a标签是行内元素 不转为块级元素无法设置宽和高 但是只要是弹性项目 就可以设置 */
-            flex-direction:row;
+            flex-direction: row;
         }
+
         .op {
             /* 相对定位 子绝父相 */
             position: relative;
@@ -147,6 +167,7 @@
             /* 刚才定义--i这个属性值可以通过var函数来调用 */
             /* 刷一下就变了 哈哈 这块calc方法可以自动计算 var函数调用了刚刚我们给a设置的1-4这四个属性值,然后分别计算出了一个度数 hue-rotate这个属性是颜色滤镜 可以添加 不同的度数来改变颜色 最大值360deg 最小是就是0 原来的颜色 */
         }
+
         .op::before,
         .op::after {
             content: "";
@@ -159,17 +180,21 @@
             /* 设置一下过渡时间 */
             transition: all 0.5s;
         }
+
         .op::before {
             top: -5px;
             left: 10%;
         }
+
         .op::after {
             bottom: -5px;
             right: 10%;
         }
+
         .op:hover::before {
             left: 80%;
         }
+
         .op:hover::after {
             right: 80%;
         }
@@ -190,34 +215,43 @@
                 <th>姓名</th>
                 <th>科目</th>
                 <th>成绩</th>
-                <th></th>
+                <th style="text-align: center">操作</th>
             </tr>
             </thead>
             <tbody>
-            <%Exam exams= (Exam) session.getAttribute("logExam");
-            List<Student> students= (List<Student>) session.getAttribute("logStudent");
-            List<ExamLog> examLogs= (List<ExamLog>) session.getAttribute("examLogs");
-                for(ExamLog examLog:examLogs)
-                {
+            <%
+                Exam exams = (Exam) session.getAttribute("logExam");
+                List<Student> students = (List<Student>) session.getAttribute("logStudent");
+                List<ExamLog> examLogs = (List<ExamLog>) session.getAttribute("examLogs");
+                for (ExamLog examLog : examLogs) {
                     Exam exam = null;
-                    Student student=null;
-                        if (exams.getExam_id()==examLog.getExam_id()){
-                            exam=exams;
+                    Student student = null;
+                    if (exams.getExam_id() == examLog.getExam_id()) {
+                        exam = exams;
                     }
-                    for (Student studentModel:students){
-                        if (studentModel.getStu_id()==examLog.getStu_id()){
-                            student=studentModel;
+                    for (Student studentModel : students) {
+                        if (studentModel.getStu_id() == examLog.getStu_id()) {
+                            student = studentModel;
                         }
                     }
             %>
             <tr>
-                <td><%=student.getStu_number()%></td>
-                <td><%=student.getStu_name()%></td>
-                <td><%=exam.getExam_name()%></td>
-                <td><%=examLog.getScore()%></td>
-                <form method="post" action="${pageContext.request.contextPath}/allAnswer"><td><button class="button" name="logIdButton" value=<%=examLog.getLog_id()%>>答题详情</button></td></form>
+                <td><%=student.getStu_number()%>
+                </td>
+                <td><%=student.getStu_name()%>
+                </td>
+                <td><%=exam.getExam_name()%>
+                </td>
+                <td><%=examLog.getScore()%>
+                </td>
+                <form method="post" action="${pageContext.request.contextPath}/allAnswer">
+                    <td>
+                        <button class="button" name="logIdButton" style="width: 60px;margin-left: 37%" value=<%=examLog.getLog_id()%>>答题详情</button>
+                    </td>
+                </form>
             </tr>
-            <%}
+            <%
+                }
             %>
             </tbody>
         </table>

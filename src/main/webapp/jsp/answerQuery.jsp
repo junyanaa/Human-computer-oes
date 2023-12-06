@@ -11,6 +11,7 @@
 <html>
 <head>
     <title>答题详情</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         * {
             margin: 0;
@@ -166,6 +167,19 @@
             right: 80%;
         }
     </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!-- 引入Popper.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- 引入Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+
+        function showModal() {
+            $('#checkModal').modal('show');
+        }
+
+    </script>
 </head>
 <body>
 <main class="table">
@@ -182,7 +196,7 @@
                 <th>题目</th>
                 <th>正确答案</th>
                 <th>学生答案</th>
-                <th></th>
+                <th style="text-align: center">操作</th>
             </tr>
             </thead>
             <tbody>
@@ -203,6 +217,9 @@
                 <td><%=question.getQuestion_content()%></td>
                 <td><%=question.getQuestion_answer()%></td>
                 <td><%=answer.getStu_answer()%></td>
+                <td>
+                    <button class="button" style="width: 60px;margin-left: 37%" onclick="showModal()">检查</button>
+                </td>
             </tr>
             <%}
             %>
@@ -210,5 +227,42 @@
         </table>
     </section>
 </main>
+
+<div class="modal fade" id="checkModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="checkModalLabel">检查答题详情</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="关闭">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="#" method="post">
+                    <div class="form-group">
+                        <label class="col-form-label">题目:</label>
+                        <input type="text" class="form-control" name="title">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">正确答案:</label>
+                        <input type="text" class="form-control" name="answer">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-form-label">学生答案:</label>
+                        <input type="text" class="form-control" name="stuAnswer">
+                    </div>
+
+                </form>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">修正</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

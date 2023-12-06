@@ -21,5 +21,9 @@ public interface StuMapper {
 
     //学生查所有考试
     List<Exam> stuFindAllExam();
+
+    Integer addStudent(Student student);
+
+    Integer updateStudent(Student student);
 }
 
