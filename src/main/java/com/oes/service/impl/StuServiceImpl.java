@@ -31,6 +31,17 @@ public class StuServiceImpl implements StuService {
     public List<Exam> stuFindAllExam(){
         return StuMapper.stuFindAllExam();
     }
+
+    @Override
+    public Integer addStudent(Student student) {
+        return StuMapper.addStudent(student);
+    }
+
+    @Override
+    public Integer updateStudent(Student student) {
+        return StuMapper.updateStudent(student);
+    }
+
     public Student findStudent(String stu_id){
         return StuMapper.findStudent(stu_id);
     }

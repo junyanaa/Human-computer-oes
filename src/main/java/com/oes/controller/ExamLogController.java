@@ -25,28 +25,29 @@ public class ExamLogController {
     private ExamService examService;
     @Autowired
     private StuService stuService;
+
     @RequestMapping(value = "/allExamLog")
     @ResponseBody
     public void examLogs(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String examId =request.getParameter("logExamId");
-        List<ExamLog> examLogs=examLogService.allExamLog(examId);
-        List<String> stu_ids=examLogService.findStudent(examId);
-        List<Student> students =new ArrayList<>();
-        for (String stu_id:stu_ids){
-            Student student=stuService.findStudent(stu_id);
+        String examId = request.getParameter("logExamId");
+        List<ExamLog> examLogs = examLogService.allExamLog(examId);
+        List<String> stu_ids = examLogService.findStudent(examId);
+        List<Student> students = new ArrayList<>();
+        for (String stu_id : stu_ids) {
+            Student student = stuService.findStudent(stu_id);
             students.add(student);
         }
-        Exam logExam=examService.findExam(examId);
-        if (examLogs!=null) {
-            request.getSession().setAttribute("examLogs",examLogs);
-            request.getSession().setAttribute("logExam",logExam);
-            request.getSession().setAttribute("logStudent",students);
+        Exam logExam = examService.findExam(examId);
+        if (examLogs != null) {
+            request.getSession().setAttribute("examLogs", examLogs);
+            request.getSession().setAttribute("logExam", logExam);
+            request.getSession().setAttribute("logStudent", students);
             response.sendRedirect("jsp/recordQuery.jsp");
-        }else if (logExam==null){
-            request.setAttribute("message","考试信息错误！");
+        } else if (logExam == null) {
+            request.setAttribute("message", "考试信息错误！");
             response.sendRedirect("jsp/stuMain.jsp");
-        }else{
-            request.setAttribute("message","无考试记录！");
+        } else {
+            request.setAttribute("message", "无考试记录！");
             response.sendRedirect("jsp/stuMain.jsp");
         }
     }
