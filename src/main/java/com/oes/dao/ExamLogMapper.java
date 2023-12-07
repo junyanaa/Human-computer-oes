@@ -10,4 +10,5 @@ import java.util.List;
 public interface ExamLogMapper {
     List<ExamLog> allExamLog(String exam_id);
     List<String> findStudent(String exam_id);
+    int findLogId(@Param("exam_id")String exam_id, @Param("stu_id") int stu_id);
 }

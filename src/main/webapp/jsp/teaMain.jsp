@@ -191,17 +191,17 @@
     </div>
 </div>
 
-<div class="overlay" id="overlay">
-    <div class="popup">
-        <span class="close" onclick="closeForm()">&times;</span>
-        <form action="${pageContext.request.contextPath}/allExamLog" method="post">
-            <label class="winLabel" for="examId">
-                <input class="winInput"  type="text" name="logExamId" id="examId" placeholder="输入考试ID">
-            </label>
-            <input class="winButton" type="submit" value="确认">
-        </form>
-    </div>
-</div>
+<%--<div class="overlay" id="overlay">--%>
+<%--    <div class="popup">--%>
+<%--        <span class="close" onclick="closeForm()">&times;</span>--%>
+<%--        <form action="${pageContext.request.contextPath}/allExamLog" method="post">--%>
+<%--            <label class="winLabel" for="examId">--%>
+<%--                <input class="winInput"  type="text" name="logExamId" id="examId" placeholder="输入考试ID">--%>
+<%--            </label>--%>
+<%--            <input class="winButton" type="submit" value="确认">--%>
+<%--        </form>--%>
+<%--    </div>--%>
+<%--</div>--%>
 <div class="shell">
     <div class="box"  onclick="allExam()">
         <form id="examThing" action="${pageContext.request.contextPath}/allExam" method="post">
@@ -227,7 +227,7 @@
             <p>管理教师班级学生</p>
         </div></form>
     </div>
-    <div class="box" onclick="openForm()">
+    <div class="box" onclick="window.location='recordQuery1.jsp'">
         <div class="images">
             <img src="${pageContext.request.contextPath}/images/3.png" alt="">
         </div>

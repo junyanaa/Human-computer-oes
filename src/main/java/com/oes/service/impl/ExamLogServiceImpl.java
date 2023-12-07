@@ -18,4 +18,5 @@ public class ExamLogServiceImpl implements ExamLogService {
     public List<String> findStudent(String exam_id){
         return examLogMapper.findStudent(exam_id);
     }
+    public int findLogId(String exam_id,int stu_id){return  examLogMapper.findLogId(exam_id,stu_id);}
 }

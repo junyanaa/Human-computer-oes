@@ -31,7 +31,6 @@
         from answer
         where log_id = #{log_id}
     </select>
-
     <!--存入学生该门考试的成绩-->
     <update id="addScore">
         update exam_log set score = #{score}

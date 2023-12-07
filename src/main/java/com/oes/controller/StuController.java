@@ -1,10 +1,7 @@
 package com.oes.controller;
 
-import com.oes.bean.Exam;
-import com.oes.bean.ExamResult;
-import com.oes.bean.Student;
-import com.oes.bean.Teacher;
-import com.oes.service.StuService;
+import com.oes.bean.*;
+import com.oes.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +19,15 @@ public class StuController {
     //注入StuService对象
     @Autowired
     private StuService stuService;
+    @Autowired
+    private QuestionService questionService;
+    @Autowired
+    private ExamLogService examLogService;
+    @Autowired
+    private AnswerService answerService;
 
+    @Autowired
+    private ExamService examService;
     //学生登录
     @RequestMapping(value = "/stuLogin",method = RequestMethod.POST)
     public String StuLogin(HttpServletRequest request) {
@@ -89,17 +94,14 @@ public class StuController {
     public String stuAttendExam(HttpServletRequest request){
         //获取session域中当前用户的id
         Student student = (Student) request.getSession().getAttribute("stu_session");
-
         int stu_id = student.getStu_id();
         //利用id进行成绩查询
         List<ExamResult> examResults = stuService.stuCheckScore(stu_id);
         //查询所有考试
         List<Exam> exams = stuService.stuFindAllExam();
-
         //将查询结果存入session
         request.getSession().setAttribute("examResult_session" , examResults);
         request.getSession().setAttribute("exam_session" , exams);
-
         return "redirect:/jsp/stuExamList.jsp";               //重定向到查看考试列表页面
     }
 

@@ -9,4 +9,7 @@
     <select id="findStudent" resultType="String">
         SELECT stu_id from exam_log where exam_id=#{exam_id}
     </select>
+    <select id="findLogId" resultType="int">
+        SELECT log_id from exam_log where exam_id=#{exam_id} and stu_id=#{stu_id}
+    </select>
 </mapper>
