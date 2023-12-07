@@ -53,8 +53,10 @@ public class QuestionController extends HttpServlet {
 
     @RequestMapping(value = "/FileUpload")
     public void FileUpload(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String realPath1 = "F:\\Undergraduate\\Junior\\The first semester of Junior year\\HumanComputer\\Code\\SSM\\FileUpload";
-        String realPath2 ="F:\\Undergraduate\\Junior\\The first semester of Junior year\\HumanComputer\\Code\\SSM\\tmp";
+        String realPath1 = "E:\\学习\\human-computer-oes\\FileUpload";
+        String realPath2 ="E:\\学习\\human-computer-oes\\tmp";
+        /*String realPath1 = "F:\\Undergraduate\\Junior\\The first semester of Junior year\\HumanComputer\\Code\\SSM\\FileUpload";
+        String realPath2 ="F:\\Undergraduate\\Junior\\The first semester of Junior year\\HumanComputer\\Code\\SSM\\tmp";*/
         File saveFilePath = new File(realPath1);
         File tempFilePath = new File(realPath2);
         boolean flag=false;

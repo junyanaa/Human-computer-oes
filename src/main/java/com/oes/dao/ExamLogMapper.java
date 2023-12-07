@@ -1,6 +1,7 @@
 package com.oes.dao;
 
 import com.oes.bean.ExamLog;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

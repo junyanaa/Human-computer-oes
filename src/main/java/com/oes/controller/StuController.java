@@ -103,4 +103,24 @@ public class StuController {
         return "redirect:/jsp/stuExamList.jsp";               //重定向到查看考试列表页面
     }
 
+    // 学生查看试卷
+    @RequestMapping("/stuCheckPaper")
+    public String stuCheckPaper(HttpServletRequest request){
+        Student student = (Student)request.getSession().getAttribute("stu_session");
+        int stu_id = student.getStu_id();
+
+        String exam_id= request.getParameter("exam_id");
+        List <Question> questions = questionService.findAllQuestion(exam_id);
+
+        int log_id = examLogService.findLogId(exam_id,stu_id);
+        List<Answer> answers=answerService.findStu_answer(log_id);
+
+        Exam exam = examService.findExam(exam_id);
+        request.getSession().setAttribute("exam_session" , exam);
+
+        request.getSession().setAttribute("paperQuestions",questions);
+        request.getSession().setAttribute("paperAnswers",answers);
+
+        return "redirect:/jsp/stuCheckPaper.jsp";               //重定向到查看试卷页面
+    }
 }

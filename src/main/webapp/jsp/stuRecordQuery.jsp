@@ -189,9 +189,11 @@
                 <td><%=examResult.getExam_name()%></td>
                 <td><%=examResult.getExam_start_Time() %>-<%=examResult.getExam_end_Time()%></td>
                 <td><%=examResult.getScore()%></td>
-                <td>
-                    <button class="button">查看试卷</button>
-                </td>
+                <form action="${pageContext.request.contextPath}/stuCheckPaper" method="post">
+                    <td>
+                        <button class="button" type="submit" name="exam_id" id="exam_id" value=<%=examResult.getExam_id()%> >查看试卷</button>
+                    </td>
+                </form>
             </tr>
             <%}%>
             </tbody>
